@@ -1,0 +1,9 @@
+Alfie runs 5 ft/s for up to 17 seconds, and then needs to rest for 57 seconds.
+Lincoln runs 28 ft/s for up to 6 seconds, and then needs to rest for 133 seconds.
+Tuck runs 23 ft/s for up to 4 seconds, and then needs to rest for 83 seconds.
+Sullivan runs 19 ft/s for up to 7 seconds, and then needs to rest for 108 seconds.
+Stitch runs 4 ft/s for up to 22 seconds, and then needs to rest for 62 seconds.
+Zema runs 16 ft/s for up to 6 seconds, and then needs to rest for 86 seconds.
+Mara runs 27 ft/s for up to 6 seconds, and then needs to rest for 135 seconds.
+Butter runs 12 ft/s for up to 6 seconds, and then needs to rest for 53 seconds.
+Ember runs 15 ft/s for up to 4 seconds, and then needs to rest for 50 seconds.
