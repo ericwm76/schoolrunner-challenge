@@ -10,8 +10,20 @@ const dogs = {
   Ember: {speed: 15, runningInterval: 4, restingInterval: 50},
 };
 
-const startBtn = document.querySelector('#start-btn')
+const startBtn = document.querySelector('#start-btn');
+const time = document.querySelector('#time');
+const announcement = document.querySelector('#announcement');
 
+const runRace = e => {
+  e.preventDefault();
+  let distanceWinner = findWinner(time.value);
+  let timeWinner = awardPoints(time.value);
+  announcement.innerHTML = `
+    <p>Our winner is ${distanceWinner.name}, who traveled ${distanceWinner.distance} feet in ${time.value} seconds!</p>
+    <p>${timeWinner.name} spent the most time in the lead, at ${timeWinner.points} seconds!</p>
+    `
+}
+ 
 const findTotalInterval = name => {
   return (dogs[name].runningInterval + dogs[name].restingInterval);
 };
@@ -48,11 +60,10 @@ const findWinner = seconds => {
     })
     .sort((a, b) => b.distance - a.distance);
   const winner = distances[0];
-  console.log(winner)
   return winner;
 };
 
-findWinner(3461);
+// findWinner(3461);
 // After 3461 seconds:
 // Our winner is Butter, who has travelled 4248 ft.
 // In second place is Lincoln, who has travelled 4200 ft.
@@ -60,7 +71,8 @@ findWinner(3461);
 // Yay Butter!
 
 const awardPoints = seconds => {
-  const dogPoints = Object.keys(dogs).reduce((acc, name) => {
+  const dogNames = Object.keys(dogs)
+  const dogPoints = dogNames.reduce((acc, name) => {
     acc[name] = 0;
     return acc;
   }, {});
@@ -68,13 +80,16 @@ const awardPoints = seconds => {
      let winner = findWinner(i);
      dogPoints[winner.name]++;
   };
-  console.log(dogPoints);
-  return dogPoints;
+  let points = Object.values(dogPoints).sort((a, b) => b - a)
+  let winningDog = { name: dogNames.find(dogName => dogPoints[dogName] === points[0]), points: points[0] }
+  return winningDog
 };
 
-awardPoints(3461);
+// awardPoints(3461);
 // After 3461 seconds:
 // In first place is Lincoln, who has spent 2422 seconds in the lead.
 // In second place is Butter, who has spent 822 seconds in the lead.
 // In third place is Sullivan, who has spent 189 seconds in the lead.
 // Yay Lincoln!
+
+startBtn.addEventListener('click', runRace)
