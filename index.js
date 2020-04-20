@@ -15,7 +15,15 @@ const calculateDistanceTraveled = (pupName, seconds) => {
   const numberOfCompleteIntervals = Math.floor(seconds / totalInterval);
   const distancePerInterval = (stats[pupName].speed * stats[pupName].runningInterval);
   const partialIntervalLength = seconds - (totalInterval * numberOfCompleteIntervals);
-  const totalDistance = (numberOfCompleteIntervals * distancePerInterval)
+  const partialIntervalDistance = () => {
+    if (partialIntervalLength >= stats[pupName].runningInterval) {
+      return (stats[pupName].speed * stats[pupName].runningInterval)
+    } else {
+      return (stats[pupName].speed * partialIntervalLength)
+    }
+  }
+  const totalDistance = (numberOfCompleteIntervals * distancePerInterval) + partialIntervalDistance();
+  console.log(totalDistance)
 }
 
 calculateDistanceTraveled('Alfie', 3641)
