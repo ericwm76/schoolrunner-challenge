@@ -18,8 +18,9 @@ main {
 .card {
   background-color: white;
   text-align: center;
+  font-size: .9em;
   width: 180px;
-  height: 270px;
+  height: 250px;
   border: 1px solid gray;
   border-radius: 5px;
   margin: 10px;
@@ -39,11 +40,11 @@ form {
   align-items: center;
 }
 
-input, button {
-  height: 30px;
+label, input, button {
+  height: 40px;
   border-radius: 5px;
   padding: 5px;
-  font-size: 1.1em;
+  font-size: 1.2em;
   margin: 10px;
 }
 
