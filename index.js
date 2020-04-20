@@ -10,30 +10,45 @@ const dogs = {
   Ember: {speed: 15, runningInterval: 4, restingInterval: 50},
 };
 
-const calculateDistanceTraveled = (name, seconds) => {
-  const totalInterval = (dogs[name].runningInterval + dogs[name].restingInterval);
-  const numberOfCompleteIntervals = Math.floor(seconds / totalInterval);
-  const distancePerInterval = (dogs[name].speed * dogs[name].runningInterval);
-  const partialIntervalLength = seconds - (totalInterval * numberOfCompleteIntervals);
-  const partialIntervalDistance = () => {
-    if (partialIntervalLength >= dogs[name].runningInterval) {
-      return (dogs[name].speed * dogs[name].runningInterval)
-    } else {
-      return (dogs[name].speed * partialIntervalLength)
-    }
-  }
-  const totalDistance = (numberOfCompleteIntervals * distancePerInterval) + partialIntervalDistance();
-  return totalDistance;
-}
+const findTotalInterval = name => {
+  return (dogs[name].runningInterval + dogs[name].restingInterval);
+};
+
+const findDistancePerInterval = name => {
+  return (dogs[name].speed * dogs[name].runningInterval);
+};
+
+const findNumberOfIntervals = (name, seconds) => {
+  return Math.floor(seconds / findTotalInterval(name));
+};
+
+const findPartialIntervalLength = (name, seconds) => {
+  return (seconds - (findTotalInterval(name) * findNumberOfIntervals(name, seconds)));
+};
+
+const findPartialIntervalDistance = (name, seconds) => {
+  const partialIntervalLength = findPartialIntervalLength(name, seconds);
+  if (partialIntervalLength >= dogs[name].runningInterval) {
+    return (dogs[name].speed * dogs[name].runningInterval);
+  } else {
+    return (dogs[name].speed * partialIntervalLength);
+  };
+};
+
+const findTotalDistance = (name, seconds) => {
+  return ((findNumberOfIntervals(name, seconds) * findDistancePerInterval(name)) + findPartialIntervalDistance(name, seconds));
+};
 
 const findWinner = seconds => {
   const distances = Object.keys(dogs)
-    .map(dog => ({name: dog, distance: calculateDistanceTraveled(dog, seconds)}))
-    .sort((a, b) => b.distance - a.distance)
-  const winner = distances[0]
-  console.log(winner)
-  return winner
-}
+    .map(name => {
+      return ({name: name, distance: findTotalDistance(name, seconds)})
+    })
+    .sort((a, b) => b.distance - a.distance);
+  const winner = distances[0];
+  console.log(winner);
+  return winner;
+};
 
-findWinner(3461)
+findWinner(3461);
 // After 3461 seconds, our winner is Butter, who has travelled 4248 ft. In second place is Lincoln, who has travelled 4200 ft, followed by Sullivan at 4123 ft. Yay Butter!
