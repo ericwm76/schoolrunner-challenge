@@ -10,6 +10,8 @@ const dogs = {
   Ember: {speed: 15, runningInterval: 4, restingInterval: 50},
 };
 
+const startBtn = document.querySelector('#start-btn')
+
 const findTotalInterval = name => {
   return (dogs[name].runningInterval + dogs[name].restingInterval);
 };
