@@ -32,3 +32,21 @@ img {
   border-radius: 50%;
   border: 1px solid gray
 }
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input, button {
+  height: 30px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1.1em;
+  margin: 10px;
+}
+
+#announcement {
+  font-size: 1.2em;
+}
