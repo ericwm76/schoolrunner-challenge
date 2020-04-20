@@ -46,9 +46,33 @@ const findWinner = seconds => {
     })
     .sort((a, b) => b.distance - a.distance);
   const winner = distances[0];
-  console.log(winner);
+  console.log(winner)
   return winner;
 };
 
 findWinner(3461);
-// After 3461 seconds, our winner is Butter, who has travelled 4248 ft. In second place is Lincoln, who has travelled 4200 ft, followed by Sullivan at 4123 ft. Yay Butter!
+// After 3461 seconds:
+// Our winner is Butter, who has travelled 4248 ft.
+// In second place is Lincoln, who has travelled 4200 ft.
+// In third place is Sullivan at 4123 ft.
+// Yay Butter!
+
+const awardPoints = seconds => {
+  const dogPoints = Object.keys(dogs).reduce((acc, name) => {
+    acc[name] = 0;
+    return acc;
+  }, {});
+  for (var i = 1; i <= seconds; i++) {
+     let winner = findWinner(i);
+     dogPoints[winner.name]++;
+  };
+  console.log(dogPoints);
+  return dogPoints;
+};
+
+awardPoints(3461);
+// After 3461 seconds:
+// In first place is Lincoln, who has spent 2422 seconds in the lead.
+// In second place is Butter, who has spent 822 seconds in the lead.
+// In third place is Sullivan, who has spent 189 seconds in the lead.
+// Yay Lincoln!
