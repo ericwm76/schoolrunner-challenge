@@ -1,6 +1,4 @@
-# Intro
-
-Welcome to the Schoolrunner Puplympics!
+# Welcome to the Schoolrunner Puplympics!
 
 Please visit https://ericwm76.github.io/schoolrunner-challenge/ to play.
 
