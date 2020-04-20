@@ -1,4 +1,4 @@
-const stats = {
+const dogs = {
   Alfie: {speed: 5, runningInterval: 17, restingInterval: 57},
   Lincoln: {speed: 28, runningInterval: 6, restingInterval: 133},
   Tuck: {speed: 23, runningInterval: 4, restingInterval: 83},
@@ -10,20 +10,30 @@ const stats = {
   Ember: {speed: 15, runningInterval: 4, restingInterval: 50},
 };
 
-const calculateDistanceTraveled = (pupName, seconds) => {
-  const totalInterval = (stats[pupName].runningInterval + stats[pupName].restingInterval);
+const calculateDistanceTraveled = (name, seconds) => {
+  const totalInterval = (dogs[name].runningInterval + dogs[name].restingInterval);
   const numberOfCompleteIntervals = Math.floor(seconds / totalInterval);
-  const distancePerInterval = (stats[pupName].speed * stats[pupName].runningInterval);
+  const distancePerInterval = (dogs[name].speed * dogs[name].runningInterval);
   const partialIntervalLength = seconds - (totalInterval * numberOfCompleteIntervals);
   const partialIntervalDistance = () => {
-    if (partialIntervalLength >= stats[pupName].runningInterval) {
-      return (stats[pupName].speed * stats[pupName].runningInterval)
+    if (partialIntervalLength >= dogs[name].runningInterval) {
+      return (dogs[name].speed * dogs[name].runningInterval)
     } else {
-      return (stats[pupName].speed * partialIntervalLength)
+      return (dogs[name].speed * partialIntervalLength)
     }
   }
   const totalDistance = (numberOfCompleteIntervals * distancePerInterval) + partialIntervalDistance();
-  console.log(totalDistance)
+  return totalDistance;
 }
 
-calculateDistanceTraveled('Alfie', 3641)
+const findWinner = seconds => {
+  const distances = Object.keys(dogs)
+    .map(dog => ({name: dog, distance: calculateDistanceTraveled(dog, seconds)}))
+    .sort((a, b) => b.distance - a.distance)
+  const winner = distances[0]
+  console.log(winner)
+  return winner
+}
+
+findWinner(3461)
+// After 3461 seconds, our winner is Butter, who has travelled 4248 ft. In second place is Lincoln, who has travelled 4200 ft, followed by Sullivan at 4123 ft. Yay Butter!
